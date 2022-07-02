@@ -35,4 +35,20 @@ class User extends CI_Controller
         $this->load->view('user/product/view_product', $data);
         $this->load->view('templates/Footer');
     }
+
+    public function keranjang()
+    {
+        $this->load->model('Toko_model');
+        $data['title'] = 'Product';
+        $data['produk'] = $this->Toko_model->lihat_data()->result();
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+
+
+        $this->load->view('templates/Header', $data);
+        $this->load->view('templates/Sidebar', $data);
+        $this->load->view('templates/Topbar', $data);
+        $this->load->view('user/product/view_product', $data);
+        $this->load->view('templates/Footer');
+    }
 }
